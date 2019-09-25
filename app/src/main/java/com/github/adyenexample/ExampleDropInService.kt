@@ -34,9 +34,6 @@ class ExampleDropInService : DropInService() {
     }
 
     override fun makePaymentsCall(paymentComponentData: JSONObject): CallResult {
-        val requestPayment = paymentComponentData.toString(JsonUtils.IDENT_SPACES)
-        Log.d(TAG, "makePaymentsCall - $requestPayment")
-
         val requestJson = try {
             paymentsRequestJson(paymentComponentData)
         } catch (e: PaymentMethodIsNull) {
@@ -52,12 +49,6 @@ class ExampleDropInService : DropInService() {
             val paymentsResponse = response.body()
 
             // Error body
-            val byteArray = response.errorBody()?.bytes()
-            if (byteArray != null) {
-                val errorBody = String(byteArray)
-                Log.e(TAG, "errorBody - $errorBody")
-            }
-
             if (response.isSuccessful && paymentsResponse != null) {
 
                 if (paymentsResponse.action != null) {

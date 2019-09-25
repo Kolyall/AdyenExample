@@ -21,7 +21,6 @@ import okhttp3.internal.platform.Platform
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -64,8 +63,8 @@ interface CheckoutApiService {
                     OkHttpClient.Builder()
                         .addInterceptor(loggingInterceptor)
                 ))
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .addConverterFactory(MoshiConverterFactory.create(moshi))
 //                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
                 .create(CheckoutApiService::class.java)

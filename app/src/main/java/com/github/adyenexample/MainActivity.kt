@@ -3,7 +3,6 @@ package com.github.adyenexample
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer
 import com.adyen.checkout.base.PaymentComponentState
 import com.adyen.checkout.base.model.PaymentMethodsApiResponse
 import com.adyen.checkout.base.model.paymentmethods.PaymentMethod
-import com.adyen.checkout.base.model.payments.request.PaymentComponentData
 import com.adyen.checkout.base.model.payments.request.PaymentMethodDetails
 import com.adyen.checkout.base.util.PaymentMethodTypes
 import com.adyen.checkout.card.CardComponent
@@ -55,20 +53,14 @@ class MainActivity : AppCompatActivity() {
 
         val paymentMethod = paymentMethodsApiResponse.paymentMethods?.firstOrNull { it.type.equals(PaymentMethodTypes.SCHEME) }
             ?: throw NullPointerException("paymentMethod with type not found \"${PaymentMethodTypes.SCHEME}\"")
+
         addAdyenCardView(paymentMethod, cardConfiguration)
 
-//        val bcmcConfiguration =
-//            BcmcConfiguration.Builder(
-//                this@MainActivity,
-//                BuildConfig.PUBLIC_KEY
-//            )
-//                .build()
+        addDropInPayment(cardConfiguration, paymentMethodsApiResponse)
 
-//        val googlePayConfig = GooglePayConfiguration.Builder(
-//            this@MainActivity,
-//            BuildConfig.MERCHANT_ACCOUNT
-//        ).build()
+    }
 
+    private fun addDropInPayment(cardConfiguration: CardConfiguration, paymentMethodsApiResponse: PaymentMethodsApiResponse) {
         val resultIntent = Intent(this, MainActivity::class.java)
         resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
 
@@ -76,14 +68,11 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity, resultIntent, ExampleDropInService::class.java
         )
             .addCardConfiguration(cardConfiguration)
-//            .addBcmcConfiguration(bcmcConfiguration)
-//            .addGooglePayConfiguration(googlePayConfig)
             .build()
 
         dropInPay.setOnClickListener {
             DropIn.startPayment(this@MainActivity, paymentMethodsApiResponse, dropInConfiguration)
         }
-
     }
 
     private fun addAdyenCardView(paymentMethod: PaymentMethod, cardConfiguration: CardConfiguration) {
@@ -99,10 +88,9 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity.componentState = componentState
             if (componentState?.isValid == true) {
                 // When the proceeds to pay, pass the `paymentComponentState.data` to your server to send a /payments request
-                Toast.makeText(this@MainActivity, "payment is Valid", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this@MainActivity, "payment is Not Valid", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Payment is Valid", Toast.LENGTH_SHORT).show()
             }
+            submitButton.isEnabled = componentState?.isValid == true
             // Replace CardComponent with the payment method Component that you want to add.
             // See list of Supported payment methods at https://docs.adyen.com/checkout/android/components#supported-payment-methods
         })
@@ -110,18 +98,11 @@ class MainActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val componentState = componentState
             if (componentState != null && componentState.isValid) {
-                sendPaymentRequest(componentState.data)
+                val data = componentState.data
+                val merchantService = ComponentName(packageName, ExampleDropInService::class.java.name)
+                DropInService.requestPaymentsCall(this, data, merchantService)
             }
         }
     }
-
-    private fun sendPaymentRequest(data: PaymentComponentData<PaymentMethodDetails>) {
-        Log.e(TAG, "sendPaymentRequest (line 107): $data " )
-
-        val merchantService = ComponentName(packageName, ExampleDropInService::class.java.name)
-        DropInService.requestPaymentsCall(this, data, merchantService)
-    }
-
-    val TAG: String = "MainActivity"
 
 }

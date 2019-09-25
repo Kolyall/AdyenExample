@@ -1,13 +1,77 @@
-{
-  "paymentMethod": {
-    "type": "scheme",
-    "encryptedCardNumber": "adyenan0_1_1$QOHSZXdsRSiU7\/H26HqdeOkg3Ed7uR65c4\/aIeacT33YhQ7h3LYf+cNasjJtWAhtEEMPA6eiJlcqU4vqFoJKLdr1vkw2Q3jY6oBDcucqMpsyNnB6XVbOOsoiHWauQGiX0VrDuYAka4F2BEYI51ruAsuWZ26wuPwhaREURVJYLB8fjJgIfm+UerkZdNPSjF4Oe\/3Rywid6d7Q+USNQQsz8wa3QYuDlE\/kazAnoV31RUifVMIX1vS++apMemaCA+XvosvCKtp\/cKailwFxCGdmyALSDx9CPRdo2PcG+DJI00QERSjh6DRtZ6ivbvdIPZPBP1e9G+IUt1swBxDszuj3Mg==$Fl9VXj2euQtn48DdzhtkKbUsh9UcuoHAhoJWD0AsJxCna\/9zpUX9ShtuMdMF0J9E8A3PViI42ppDV8C4EWE5aYwRh3XohlQgr5TJl0V9ulKpyXvETq2DRVJqufw+",
-    "encryptedExpiryMonth": "adyenan0_1_1$d9Qr3RUY57w7DFvtdPZN2eNAjeHcYcKbkb5+uxvSr6xjtliJMmGMTkXppd\/iDyLE62m4loel3DDrcInALcniEGWUvKsZVg49JIJxzVCIQ7W8fq+7ciD0mXpRzmD5t6cBirT6CkwImj7bs8RNASkCCgTAhzX9yhPccAj72AzYLaQj6kNEPFJbUX7iCLcx7m4HSLTYpyrm0b47F5LFJdFUxFZmLIEX4sTMtXv3mCWiOLRV0SV0FMx7CsYubiIOu+miz0+jtXj\/0HdYMKG9YuBmxtTKPeQjYHnAYgMCTkS0T0XzsnA+QLm7g\/Hf+QKc0WrZGhiy5QTzcqCSw6BcHLpxlQ==$ntWjJJE34GD0ltMywdIQqhNbR5y5BpZKzNM24mzxu6Kfy4J3d\/gERXhoKunODftuMc\/0h7amJtxWcyUVEn3eBZD9OdNdiPnO\/qsVOPkFxCg6z4f3",
-    "encryptedExpiryYear": "adyenan0_1_1$cA2dXS+iAw6YYjjnpYwNFT24XGUK10omgoEFss54QD9gaB3Nlivz4PxPxZdiJiQR\/9WNLm\/I10KIw9XxJyWG8dJT1trC1sec4Lq7l0tQzKingPPhtZs85izfio7oyj0QFQgtTDfHe9A6GGo3Ptz8CNMbxdzoUcf3WX5amRbVDXZ+eZET7wIsRhpbh1XBqtII5O27\/\/UbLpqBhyeMWtpgz+DEHkGxL9M+Y5bzKIGINWHVkl0F3RJ8+3A3rgApPWF6j1Bt\/bF3E6RBw8vIsuxhzy2RbMEZrjToZTwsw40pZWID2hPmqEBNJrlgZKmrYlFzYKwsjm7+Ic6ys+Wy7NRKIA==$SLCVBf76xPU07Ba+Srn7wSp0j6qk2mnqkz\/WZYO99M1vGQWNLgz4iZq8TPgaT+CJG2INfX3MTYCEcjjM8N8ayETF\/qkcf4I+mK4X6qIa717BnjqWaQ==",
-    "encryptedSecurityCode": "adyenan0_1_1$sC1z7mcy7BArGnu3PqOofe5sRam9U8DLSRJxmcRF+DML1slTueCw8IXMESHHy1jOJ1S24P5njpjIrj5FNRkhPbSIaO+Mipr6wOcCuH9kUym2pnchQ+EcjEpWa6SJBM\/7jQ1DaxR9WGD9JSwGTBaM8pvx\/U8IHxSh6HWO\/uzczDxvtd1krh7lZwkEnjRxACzSFfcNfO+UQ+vJD343enLiNNf8T6087lW4EaRRU1RFLQkEop9tlPT3iZbWe+9zFMhPHkf4855jchjMygcxOe4pi51PmFl+BRt0ZytaScbnDXGUOdynHckFjgArsdw0IUTjEFObcP\/erK2tP7E2IaalAg==$HFoIUmM2PDqgA21rspx61BYYdW2LNn+JQ8UhtToAva\/5jAKHizbCAxAngRCtnrsUaAhmXR48a1aEdol1XPA7sQ76\/HEyDPLTXPuXOvaj",
-    "recurringDetailReference": "",
-    "holderName": "retef"
-  },
-  "storePaymentMethod": true,
-  "shopperReference": "https:\/\/www.google.com\/"
-}
+I/ .Request: ┌────── Request ────────────────────────────────────────────────────────────────────────
+I/. Request: │ URL: https://checkout-test.adyen.com/v49/payments
+I/ .Request: │
+I/. Request: │ Method: @POST
+I/ .Request: │
+I/. Request: │ Headers:
+I/ .Request: │ ─ x-API-key: AQEnhmfuXNWTK0Qc+iSem2czssWYS4RYA4e1EkGpAdZVGKDGKy1kfMzcEMFdWw2+5HzctViMSCJMYAc=-THbZKZYRD9XCtjwn
+I/. Request: │ M8nOqIRK4WE/sDvXQvxchuctzLI=-d57P5QUDnvq8Af89
+I/ .Request: │
+I/. Request: │ Body:
+I/ .Request: │ {
+I/. Request: │    "additionalData": {
+I/ .Request: │       "allow3DS2": "false"
+I/. Request: │    },
+I/ .Request: │    "amount": {
+I/. Request: │       "currency": "EUR",
+I/ .Request: │       "value": 1337
+I/. Request: │    },
+I/ .Request: │    "channel": "android",
+I/. Request: │    "merchantAccount": "NickuAccountECOM",
+I/ .Request: │    "paymentMethod": {
+I/. Request: │       "encryptedCardNumber": "adyenan0_1_1$zFpPzc6Ny\/ls5kug3\/Me4JnKyTcqAaZmdqQwWbLn4ojmOeToArsWwL8M5B8PjXH3R
+I/ .Request: │ QdzsaF6mYJwBv+cD+Pu\/c0D3vS4vY5Qn8fshaPsTX8gpApH2h9FVu\/LDHWEW\/KWuAdh6WCX85qO+\/610S23lrlgdxglKfv62cJ\/nl5zum
+I/. Request: │ qJVjID56QoYQ4yvdl534GOsZWNICwtuq9deMufg2YNGyjyzm8zvc78Rx\/NbFRnB1pdoLH0cpDYixmx74PtLB657pWvlGg3arri2peFF1X2\/L
+I/ .Request: │ fI4zQ8ll9cCuNMrww5EIdojQAB8FuhTi\/iRvs5zvhtLUC\/ufuTkOpaRTK7kndYFA==$WoNYpGMiJ5DTVsMmMTR9qNoRnj6EOwvdSfF\/CfpU
+I/. Request: │ +hC+R762Ji1HyxrZoYFfobx\/3psIJR13qz4oeHOJmUcY0eASDWKQFQCw6PWWJ0KvKtIuuulOphiWqut+OH1U",
+I/ .Request: │       "encryptedExpiryMonth": "adyenan0_1_1$zp9vPawQcOfsE1YY8bRYbIve1cH3TGHvff5LKp1vv\/ucDQOZHFBYdCnWa0AtCTzsJ
+I/. Request: │ uJOoCirTXeerGwL8zKNtPhpWAzgE6grG9cZlJXHNVF9MAFLYi3vqVkqBOezrFR6a00irumMEU3jqnVc2PD7bA55PnWWVZ5\/Z\/vyxmFBmztlw
+I/ .Request: │ \/aVcKjaCMnYwmuLouY46kHgSoiJmZzA3T9G6P17lQ7jiLKS3BtPleroRbbfB67ILNy6CLZSyaTGTxqZkKcj9bDQC9seM1npeLKjD4BzHhDzm1
+I/. Request: │ ifwO8THhrZ5iWhfB3++hlJEX3EnGSeGjO5o36aZhKO1xL2pX6GeGvqYIu+GA==$XQ8AvG030SxFDuIJEHIbiQrJreLUf0psT6n5JNLLWIpXEg6
+I/ .Request: │ wUKK49vW+MvhcM8v1uE87D5UIYBpN+8s6bFpBEJp88mS+qMB5Bqo8WgNTHq+20AW8",
+I/. Request: │       "encryptedExpiryYear": "adyenan0_1_1$vHdVfUWDY2m7XP3mpKdwfi87VvNHaxZn9mjuA0L5kSwoVxEpXKpi7fErXQzrZY9eup8
+I/ .Request: │ Y6jY4kFLcyeokbn58Kfo43U+oh4pNfin8\/CA4rIi4WmzCF8phbuEf2P7gm+UDPzloY9fkdM1fzWiwEC86GQDLSN5gU04qM2mhnRpE4ufzdHQs
+I/. Request: │ wO38JM0wNaW9ICPhHxTakUp5uXv7Wdgkh\/K+RXYxIRGN9pKP4mYJvSq4DbK30MjwvueUNSmD5GxygMxUUgqp4vWmGTs7wWybeJgK5730ZCair
+I/ .Request: │ XhJflgzBPMerQK7ZxkWpxRrfKyy8FQ62vQSk9raySLqLMHAh+sSSSb91g==$ABaY0ECU\/vq88SXAtrCX\/A44PrnmLv3d5NYuEl8MkMhPcXSj
+I/. Request: │ ASU4aZr6VyBmNolrlneSL9bAtHpIAs3dUQCESrMbBDUdY2toy9nvaWcXMvfQrVX0Og==",
+I/ .Request: │       "encryptedSecurityCode": "adyenan0_1_1$v0cM9yYZFvsWnLxG5ml0pFokZxcO9mF905g1WxR00sDmxoiF9t5A9U6JYeHtpuIwL
+I/. Request: │ AQGqBqSFNRnZSBjdqVlWqSZ2Ezt7zaUYlfePgrxQtLY\/n2sFw+9ziCs4WvNiZp8z9bxilbg\/hN2gDo+EbQy\/8FjgNGEBOzTqjbe1G5iTRIp
+I/ .Request: │ JfwXhrHHlhG2C0k+3dCbXlya1OsVXFTFC9Ng6ee1+9AAa6vtxx23zA+Y6r0fOyOviBm+tHDtHYF0AVBoqQggwZtclLkC6s2wEkLKslzvaNe7Th
+I/. Request: │ IUgXCvZspVrxl6UTMtZLAquRtufFDehue+FGy6QBDKnxm+\/kX2At1dDwZIIA==$67N7EAxWLBwPeDM9EFGy4W1Pmdlp+YGC2EUxpKZK\/RB5E
+I/ .Request: │ pMXJP6aC8eU+g4ElsZ\/KEZkE1\/txU6Vo2gDySF96GS+v4zVXOoIvjH2018=",
+I/. Request: │       "holderName": "sdd",
+I/ .Request: │       "recurringDetailReference": "",
+I/. Request: │       "type": "scheme"
+I/ .Request: │    },
+I/. Request: │    "reference": "android-test-components",
+I/ .Request: │    "returnUrl": "adyencheckout:\/\/com.github.adyenexample",
+I/. Request: │    "shopperReference": "",
+I/ .Request: │    "storePaymentMethod": true
+I/. Request: │ }
+I/ .Request: └───────────────────────────────────────────────────────────────────────────────────────
+I/. Response: ┌────── Response ───────────────────────────────────────────────────────────────────────
+I/ .Response: │ URL: https://checkout-test.adyen.com/v49/payments
+I/. Response: │
+I/ .Response: │ /v49/payments - is success : true - Received in: 533ms
+I/. Response: │
+I/ .Response: │ Status Code: 200 / OK
+I/. Response: │
+I/ .Response: │ Headers:
+I/. Response: │ ┌ Date: Wed, 25 Sep 2019 12:10:17 GMT
+I/ .Response: │ ├ Server: Apache
+I/. Response: │ ├ Set-Cookie: JSESSIONID=94BD9C15773531EE73395FB4B73FAA66.test3e; Path=/checkout; Secure; HttpOnly
+I/ .Response: │ ├ pspReference: 851569413417455J
+I/. Response: │ ├ Keep-Alive: timeout=15, max=100
+I/ .Response: │ ├ Connection: Keep-Alive
+I/. Response: │ ├ Transfer-Encoding: chunked
+I/ .Response: │ └ Content-Type: application/json;charset=UTF-8
+I/. Response: │
+I/ .Response: │ Body:
+I/. Response: │ {
+I/ .Response: │    "pspReference": "882569413417960C",
+I/. Response: │    "refusalReason": "Refused",
+I/ .Response: │    "resultCode": "Refused",
+I/. Response: │    "refusalReasonCode": "2",
+I/ .Response: │    "merchantReference": "android-test-components"
+I/. Response: │ }
+I/ .Response: └───────────────────────────────────────────────────────────────────────────────────────
