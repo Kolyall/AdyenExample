@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 if (file("local.gradle").exists()) {
     apply from: "local.gradle"
 } else {
@@ -28,12 +30,26 @@ android {
 
 dependencies {
 
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //region test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //endregion
+
+    def daggerVersion = "2.24"
+    def javaxInjectVersion = "1"
+    def javaxAnnotationVersion = "1.0"
+    def okHttpVersion = '4.0.0-alpha02'
     def version_retrofit2 = "2.5.0"
+    def retrofitRxjava2AdapterVersion = '2.6.0'
     def gsonVersion = '2.8.5'
     def adyen_version = "3.4.0"
     def multidex_version = "2.0.1"
+    def rxJavaVersion = '2.2.11'
+    def rxAndroidVersion = '2.1.1'
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -47,17 +63,38 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$multidex_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    //region Remote
+    implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit2"
     implementation "com.squareup.retrofit2:converter-gson:$version_retrofit2"
     implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation("com.squareup.retrofit2:adapter-rxjava2:${retrofitRxjava2AdapterVersion}") {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
+
     implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
         exclude group: 'org.json', module: 'json'
         exclude group: 'com.squareup.okhttp3', module: 'logging-interceptor'
     }
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation("io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}") {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
+    //endregion
+
+    //region Dagger
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${daggerVersion}"
+    implementation("com.google.dagger:dagger-android-support:${daggerVersion}")
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    implementation "javax.inject:javax.inject:${javaxInjectVersion}"
+    implementation "javax.annotation:jsr250-api:${javaxAnnotationVersion}"
+    //endregion
+
 }
 
 repositories {

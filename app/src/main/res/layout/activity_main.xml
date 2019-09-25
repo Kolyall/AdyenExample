@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.adyen.checkout.card.CardView
-        android:id="@+id/adyenCardView"
+    <ViewStub
+        android:id="@+id/adyenCardViewViewStub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inflatedId="@+id/adyenCardView"
+        android:layout="@layout/viewstub_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,15 +24,7 @@
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adyenCardView" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/dropInPay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Drop In Pay"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
+        app:layout_constraintTop_toBottomOf="@+id/adyenCardView"
+        tools:layout_constraintTop_toBottomOf="@+id/adyenCardViewViewStub" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

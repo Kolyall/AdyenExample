@@ -1,87 +1,95 @@
 package com.github.adyenexample
 
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.ViewStub
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.Observer
 import com.adyen.checkout.base.PaymentComponentState
 import com.adyen.checkout.base.model.PaymentMethodsApiResponse
-import com.adyen.checkout.base.model.paymentmethods.PaymentMethod
 import com.adyen.checkout.base.model.payments.request.PaymentMethodDetails
 import com.adyen.checkout.base.util.PaymentMethodTypes
 import com.adyen.checkout.card.CardComponent
 import com.adyen.checkout.card.CardConfiguration
 import com.adyen.checkout.card.CardView
 import com.adyen.checkout.core.api.Environment
-import com.adyen.checkout.dropin.DropIn
-import com.adyen.checkout.dropin.DropInConfiguration
-import com.adyen.checkout.dropin.service.DropInService
-import org.json.JSONObject
+import com.github.adyenexample.api.RxApiServiceCheckout
+import com.github.adyenexample.api.model.createPaymentMethodsRequest
+import com.github.adyenexample.api.model.createPaymentsRequest
+import dagger.android.AndroidInjection
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    private val disposables: CompositeDisposable = CompositeDisposable()
+
+    @Inject
+    lateinit var rxApiServiceCheckout: RxApiServiceCheckout
+
     private var componentState: PaymentComponentState<PaymentMethodDetails>? = null
-    lateinit var adyenCardView: CardView
-    lateinit var submitButton: AppCompatButton
-    lateinit var dropInPay: AppCompatButton
+    private lateinit var adyenCardView: CardView
+    private lateinit var adyenCardViewViewStub: ViewStub
+    private lateinit var submitButton: AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adyenCardView = findViewById(R.id.adyenCardView)
+        adyenCardViewViewStub = findViewById(R.id.adyenCardViewViewStub)
         submitButton = findViewById(R.id.submitButton)
-        dropInPay = findViewById(R.id.dropInPay)
 
-        val paymentMethodsResponse = JSONObject(getString(R.string.json_response))
-        val paymentMethodsApiResponse = PaymentMethodsApiResponse.SERIALIZER.deserialize(paymentMethodsResponse)
+        getPaymentMethods()
+    }
 
-        val builder = CardConfiguration.Builder(this, BuildConfig.PUBLIC_KEY)
-        builder
-            .setEnvironment(Environment.TEST)
+    private fun getPaymentMethods() {
+        val request = createPaymentMethodsRequest(this)
+        rxApiServiceCheckout.paymentMethods(request)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { response ->
+                Log.d(TAG, "doOnSuccess: $response")
+                onGetPaymentMethods(response)
+            }
+            .subscribe({}, {}, {})
+            .addToDisposables(disposables)
+    }
+
+    private fun onGetPaymentMethods(response: PaymentMethodsApiResponse) {
+        addAdyenCardView(response)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
+    }
+
+    private fun addAdyenCardView(response: PaymentMethodsApiResponse) {
+        val paymentMethod = response.paymentMethods?.firstOrNull { it.type.equals(PaymentMethodTypes.SCHEME) }
+            ?: throw NullPointerException("paymentMethod with type not found \"${PaymentMethodTypes.SCHEME}\"")
+
         val cardConfiguration =
-            builder
+            CardConfiguration.Builder(this, BuildConfig.PUBLIC_KEY)
+                .apply { setEnvironment(Environment.TEST) }
                 .setShopperReference(BuildConfig.SHOPPER_REFERENCE)
                 .setHolderNameRequire(true)
                 .setShowStorePaymentField(true)
-                // When you're ready to accept live payments, change the value to one of our live environments.
                 .build()
-        // Create the configuration for the payment method that you want to add.
 
-        val paymentMethod = paymentMethodsApiResponse.paymentMethods?.firstOrNull { it.type.equals(PaymentMethodTypes.SCHEME) }
-            ?: throw NullPointerException("paymentMethod with type not found \"${PaymentMethodTypes.SCHEME}\"")
-
-        addAdyenCardView(paymentMethod, cardConfiguration)
-
-        addDropInPayment(cardConfiguration, paymentMethodsApiResponse)
-
-    }
-
-    private fun addDropInPayment(cardConfiguration: CardConfiguration, paymentMethodsApiResponse: PaymentMethodsApiResponse) {
-        val resultIntent = Intent(this, MainActivity::class.java)
-        resultIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-
-        val dropInConfiguration = DropInConfiguration.Builder(
-            this@MainActivity, resultIntent, ExampleDropInService::class.java
-        )
-            .addCardConfiguration(cardConfiguration)
-            .build()
-
-        dropInPay.setOnClickListener {
-            DropIn.startPayment(this@MainActivity, paymentMethodsApiResponse, dropInConfiguration)
-        }
-    }
-
-    private fun addAdyenCardView(paymentMethod: PaymentMethod, cardConfiguration: CardConfiguration) {
         val cardComponent = CardComponent.PROVIDER.get(this, paymentMethod, cardConfiguration)
 
 
         // Replace CardComponent with the payment method Component that you want to add.
         // See list of Supported payment methods at https://docs.adyen.com/checkout/android/components#supported-payment-methods
 
+        val inflate = adyenCardViewViewStub.inflate()
+        adyenCardView = inflate as CardView
         adyenCardView.attach(cardComponent, this)
 
         cardComponent.observe(this@MainActivity, Observer { componentState ->
@@ -98,11 +106,31 @@ class MainActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val componentState = componentState
             if (componentState != null && componentState.isValid) {
-                val data = componentState.data
-                val merchantService = ComponentName(packageName, ExampleDropInService::class.java.name)
-                DropInService.requestPaymentsCall(this, data, merchantService)
+                val paymentComponentData = componentState.data
+
+                if (paymentComponentData.paymentMethod == null) {
+                    Toast.makeText(this@MainActivity, "paymentMethod is Not Valid", Toast.LENGTH_SHORT).show()
+                }
+
+                val paymentsRequest = createPaymentsRequest(this, paymentComponentData)
+
+                rxApiServiceCheckout.payments(paymentsRequest)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSuccess { response ->
+                        Log.d(TAG, "doOnSuccess: $response")
+                        Toast.makeText(this@MainActivity, response.resultCode, Toast.LENGTH_SHORT).show()
+                    }
+                    .subscribe({}, {}, {})
+                    .addToDisposables(disposables)
             }
         }
     }
 
+    val TAG: String = "MainActivity"
+
+}
+
+private fun Disposable.addToDisposables(disposables: CompositeDisposable) {
+    disposables.add(this)
 }
