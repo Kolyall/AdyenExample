@@ -4,25 +4,28 @@ import android.util.Log
 import android.widget.Toast
 import com.adyen.checkout.base.model.payments.request.PaymentComponentData
 import com.adyen.checkout.base.model.payments.request.PaymentMethodDetails
-import com.adyen.checkout.redirect.RedirectComponent
+import com.github.adyenexample.ext.DEFAULT_COUNTRY
+import com.github.adyenexample.ext.DEFAULT_LOCALE
 import com.github.adyenexample.ext.SchedulersProvider
 import com.github.adyenexample.ext.async
-import com.github.adyenexample.ext.createPaymentMethodsRequest
-import com.github.adyenexample.ext.createPaymentsRequest
-import com.github.adyenexample.ext.getAmount
 import com.github.adyenexample.ext.subscribeAndAdd
 import com.github.adyenexample.models.CardItem
 import com.github.adyenexample.models.toApi
 import com.github.adyenexample.models.toViewModel
+import com.github.kolyall.adyen.AdyenConfig
 import com.github.kolyall.adyen.RxApiServiceCheckout
 import com.github.kolyall.adyen.model.ApiAdditionalData
+import com.github.kolyall.adyen.model.ApiPaymentMethodsRequest
 import com.github.kolyall.adyen.model.ApiPaymentsRequest
+import com.github.kolyall.adyen.model.ApiRecurentPaymentMethod
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
-class MainActivityPresenter @Inject constructor(
+class MainActivityPresenter
+@Inject constructor(
+    private val adyenConfig: AdyenConfig,
     private val gson: Gson,
     private val rxApiServiceCheckout: RxApiServiceCheckout,
     private val schedulersProvider: SchedulersProvider
@@ -35,15 +38,16 @@ class MainActivityPresenter @Inject constructor(
 
     fun makeRecurentPayment(cardItem: CardItem) {
 
-        val paymentMethod = com.github.kolyall.adyen.model.ApiRecurentPaymentMethod()
+        val paymentMethod = ApiRecurentPaymentMethod()
         paymentMethod.type = "scheme"
         paymentMethod.storedPaymentMethodId = cardItem.id
+
         val paymentsRequest = ApiPaymentsRequest(
             paymentMethod = paymentMethod,
             shopperReference = "shopperReferenceId",
-            amount = getAmount(),
-            merchantAccount = BuildConfig.MERCHANT_ACCOUNT,
-            returnUrl = RedirectComponent.getReturnUrl(view),
+            amount = adyenConfig.defaultAmount,
+            merchantAccount = adyenConfig.merchantAccount,
+            returnUrl = adyenConfig.returnUrl,
             additionalData = ApiAdditionalData(),
             storePaymentMethod = false,
             recurringProcessingModel = "Subscription",
@@ -59,7 +63,12 @@ class MainActivityPresenter @Inject constructor(
     }
 
     fun getPaymentMethods() {
-        val request = createPaymentMethodsRequest("shopperReferenceId")
+        val request = ApiPaymentMethodsRequest(
+            merchantAccount = adyenConfig.merchantAccount,
+            shopperReference = "shopperReferenceId", amount = adyenConfig.defaultAmount,
+            countryCode = DEFAULT_COUNTRY,
+            shopperLocale = DEFAULT_LOCALE
+        )
         rxApiServiceCheckout.paymentMethods(request)
             .async(schedulersProvider)
             .doOnSuccess { response ->
@@ -79,9 +88,18 @@ class MainActivityPresenter @Inject constructor(
         }
 
         val paymentMethod = paymentComponentData.paymentMethod as PaymentMethodDetails
-        val paymentsRequest = createPaymentsRequest(view, paymentMethod.toApi(gson), paymentComponentData.isStorePaymentMethodEnable, "shopperReferenceId")
 
-        rxApiServiceCheckout.payments(paymentsRequest)
+        val request = ApiPaymentsRequest(
+            paymentMethod = paymentMethod.toApi(gson),
+            shopperReference = "shopperReferenceId",
+            storePaymentMethod = paymentComponentData.isStorePaymentMethodEnable,
+            amount = adyenConfig.defaultAmount,
+            merchantAccount = adyenConfig.merchantAccount,
+            returnUrl = adyenConfig.returnUrl,
+            additionalData = ApiAdditionalData()
+        )
+
+        rxApiServiceCheckout.payments(request)
             .async(schedulersProvider)
             .doOnSuccess { response ->
                 Log.d(TAG, "doOnSuccess: $response")

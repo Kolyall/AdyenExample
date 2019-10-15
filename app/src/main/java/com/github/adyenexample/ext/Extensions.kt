@@ -1,50 +1,7 @@
 package com.github.adyenexample.ext
 
-import android.content.Context
-import com.adyen.checkout.redirect.RedirectComponent
-import com.github.adyenexample.BuildConfig
-import com.github.kolyall.adyen.model.ApiAdditionalData
-import com.github.kolyall.adyen.model.ApiAmount
-import com.github.kolyall.adyen.model.ApiPaymentMethodDetails
-import com.github.kolyall.adyen.model.ApiPaymentMethodsRequest
-import com.github.kolyall.adyen.model.ApiPaymentsRequest
-
-private const val DEFAULT_COUNTRY = "NL"
-private const val DEFAULT_LOCALE = "en_US"
-private const val DEFAULT_VALUE = 1337
-private const val DEFAULT_CURRENCY = "EUR"
-
-fun createPaymentMethodsRequest(shopperReferenceId: String): ApiPaymentMethodsRequest {
-    return ApiPaymentMethodsRequest(
-        merchantAccount = BuildConfig.MERCHANT_ACCOUNT,
-        shopperReference = shopperReferenceId, amount = getAmount(),
-        countryCode = DEFAULT_COUNTRY,
-        shopperLocale = DEFAULT_LOCALE
-    )
-}
-
-fun createPaymentsRequest(context: Context,
-                          paymentMethod: ApiPaymentMethodDetails,
-                          storePaymentMethod: Boolean,
-                          shopperReferenceId: String): ApiPaymentsRequest {
-
-    return ApiPaymentsRequest(
-        paymentMethod = paymentMethod,
-        shopperReference = shopperReferenceId,
-        storePaymentMethod = storePaymentMethod,
-        amount = getAmount(),
-        merchantAccount = BuildConfig.MERCHANT_ACCOUNT,
-        returnUrl = RedirectComponent.getReturnUrl(context),
-        additionalData = ApiAdditionalData()
-    )
-}
-
-fun getAmount(): ApiAmount {
-    return ApiAmount().apply {
-        currency = DEFAULT_CURRENCY
-        value = DEFAULT_VALUE
-    }
-}
+public const val DEFAULT_COUNTRY = "NL"
+public const val DEFAULT_LOCALE = "en_US"
 
 /*
 curl -X POST "https://checkout-test.adyen.com/v49/paymentMethods" -H "x-API-key: AQEnhmfuXNWTK0Qc+iSem2czssWYS4RYA4e1EkGpAdZVGKDGKy1kfMzcEMFdWw2+5HzctViMSCJMYAc=-THbZKZYRD9XCtjwnM8nOqIRK4WE/sDvXQvxchuctzLI=-d57P5QUDnvq8Af89" -H "Content-Type: application/json"  -d '{"amount":{"currency":"EUR","value":1337},"channel":"android","countryCode":"NL","merchantAccount":"NickuAccountECOM","shopperLocale":"en_US","shopperReference":"shopperReferenceId"}' -L

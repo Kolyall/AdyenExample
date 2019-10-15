@@ -13,7 +13,7 @@ class DefaultAdyenHeaderInterceptor(val adyenConfig: AdyenConfig):Interceptor {
         builder
             .header("Accept", "application/json")
             .header("content-type", "application/json")
-            .header(adyenConfig.API_KEY_HEADER_NAME, adyenConfig.CHECKOUT_API_KEY)
+            .header(adyenConfig.apiKeyHeaderName, adyenConfig.checkoutApiKey)
 
         return chain.proceed(builder.build())
     }

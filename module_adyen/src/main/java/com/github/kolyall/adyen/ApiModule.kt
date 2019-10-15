@@ -59,7 +59,7 @@ open class ApiModule {
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(adyenConfig.MERCHANT_SERVER_URL)
+            .baseUrl(adyenConfig.merchantServerUrl)
             .client(Util.enableTls12OnPreLollipop(
                 OkHttpClient.Builder()
                     .addInterceptor(DefaultAdyenHeaderInterceptor(adyenConfig))

@@ -1,12 +1,15 @@
 package com.github.adyenexample.injection
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
+import com.adyen.checkout.redirect.RedirectComponent
 import com.github.adyenexample.BuildConfig
 import com.github.adyenexample.ext.SchedulersProvider
 import com.github.kolyall.adyen.AdyenConfig
+import com.github.kolyall.adyen.model.ApiAmount
 import com.github.kolyall.java.utils.PlatformLog
 import dagger.Module
 import dagger.Provides
@@ -35,12 +38,20 @@ class AppModule {
     }
 
     @Provides
-    fun provideAdyenConfig(): AdyenConfig {
+    fun provideAdyenConfig(context: Context): AdyenConfig {
+        val defaultValue = 0
+        val defaultCurrency = "EUR"
         return AdyenConfig(
             BuildConfig.DEBUG,
             BuildConfig.MERCHANT_SERVER_URL,
             BuildConfig.API_KEY_HEADER_NAME,
-            BuildConfig.CHECKOUT_API_KEY
+            BuildConfig.CHECKOUT_API_KEY,
+            BuildConfig.MERCHANT_ACCOUNT,
+            RedirectComponent.getReturnUrl(context),
+            ApiAmount().apply {
+                currency = defaultCurrency
+                value = defaultValue
+            }
         )
     }
 

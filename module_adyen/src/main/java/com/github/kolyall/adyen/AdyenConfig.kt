@@ -1,10 +1,13 @@
 package com.github.kolyall.adyen
 
+import com.github.kolyall.adyen.model.ApiAmount
+
 data class AdyenConfig(
     val isDebug: Boolean,
-    val MERCHANT_SERVER_URL: String,
-    val API_KEY_HEADER_NAME: String,
-    val CHECKOUT_API_KEY: String
-) {
-
-}
+    val merchantServerUrl: String,
+    val apiKeyHeaderName: String,
+    val checkoutApiKey: String,
+    val merchantAccount: String,
+    val returnUrl: String,
+    val defaultAmount: ApiAmount
+)
