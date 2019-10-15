@@ -6,9 +6,9 @@
  * Created by caiof on 19/4/2019.
  */
 
-package com.github.adyenexample.api.model
+package com.github.kolyall.adyen.model
 
-data class DetailsRequest(
+data class ApiDetailsRequest(
     val paymentData: String?
     // TODO add typed details
 )

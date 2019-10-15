@@ -1,4 +1,4 @@
-package com.github.adyenexample.api.error
+package com.github.kolyall.adyen.error
 
 import retrofit2.HttpException
 import retrofit2.Response

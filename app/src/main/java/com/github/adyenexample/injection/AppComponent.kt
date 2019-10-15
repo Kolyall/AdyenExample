@@ -2,6 +2,7 @@ package com.github.adyenexample.injection
 
 import android.app.Application
 import com.github.adyenexample.TheApplication
+import com.github.kolyall.adyen.ApiModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,6 +15,7 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     ContributesModule::class,
     ModuleApp::class,
+    AppModule::class,
     ApiModule::class
 ])
 interface AppComponent : AndroidInjector<DaggerApplication> {

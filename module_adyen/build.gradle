@@ -1,25 +1,23 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-if (file("local.gradle").exists()) {
-    apply from: "local.gradle"
-} else {
-    logger.lifecycle("File example-app/local.gradle not found. Duplicate example-app/local.gradle.example and fill in your API key.")
-}
-
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
     defaultConfig {
-        multiDexEnabled true
-        applicationId "com.github.adyenexample"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,18 +28,20 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
 }
 
 dependencies {
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    //region test
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    //endregion
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+
+    def javaUtilsVersion = "1.0.1"
     def daggerVersion = "2.24"
     def javaxInjectVersion = "1"
     def javaxAnnotationVersion = "1.0"
@@ -49,24 +49,24 @@ dependencies {
     def version_retrofit2 = "2.5.0"
     def retrofitRxjava2AdapterVersion = '2.6.0'
     def gsonVersion = '2.8.5'
-    def adyen_version = "3.4.1"
-    def multidex_version = "2.0.1"
     def rxJavaVersion = '2.2.11'
-    def rxAndroidVersion = '2.1.1'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation project(":module_api_adyen")
-    implementation project(":module_adyen")
+    //region Remote
+    implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit2"
+    implementation "com.squareup.retrofit2:converter-gson:$version_retrofit2"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation("com.squareup.retrofit2:adapter-rxjava2:${retrofitRxjava2AdapterVersion}") {
+        exclude group: 'com.squareup.retrofit2', module: 'retrofit'
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
-    implementation "com.adyen.checkout:card-ui:$adyen_version"
-    implementation "com.adyen.checkout:redirect:$adyen_version"
-    implementation "com.adyen.checkout:3ds2:$adyen_version"
-    implementation "com.adyen.checkout:drop-in:$adyen_version"
-
-    implementation "androidx.multidex:multidex:$multidex_version"
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
+        exclude group: 'org.json', module: 'json'
+        exclude group: 'com.squareup.okhttp3', module: 'logging-interceptor'
+    }
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    //endregion
 
     //region Dagger
     implementation "com.google.dagger:dagger:${daggerVersion}"
@@ -80,22 +80,10 @@ dependencies {
     implementation "javax.annotation:jsr250-api:${javaxAnnotationVersion}"
     //endregion
 
-    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    def adyen_version = "3.4.1"
+    implementation "com.adyen.checkout:core-v3:${adyen_version}"
 
-    implementation("com.r0adkll:slidableactivity:2.1.0") {
-        exclude group: "com.android.support"
+    api ("com.github.kolyall:java-utils:$javaUtilsVersion"){
+        exclude group: 'io.reactivex.java2'
     }
-
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    implementation("io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}") {
-        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
-    }
-
-    implementation "com.google.code.gson:gson:${gsonVersion}"
-
-}
-
-repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
 }

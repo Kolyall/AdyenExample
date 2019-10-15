@@ -1,10 +1,11 @@
-package com.github.adyenexample.injection
+package com.github.kolyall.adyen
 
 import android.os.Build
 import com.adyen.checkout.core.api.SSLSocketUtil
-import com.github.adyenexample.BuildConfig
-import com.github.adyenexample.api.RxApiServiceCheckout
-import com.github.adyenexample.api.error.RxErrorHandlingCallAdapterFactory
+import com.github.kolyall.adyen.curl.CurlLoggerInterceptor
+import com.github.kolyall.adyen.error.RxErrorHandlingCallAdapterFactory
+import com.github.kolyall.java.utils.PlatformLog
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
@@ -22,19 +23,28 @@ import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
 @Module
-class ApiModule {
+open class ApiModule {
 
     @Provides
     @Singleton
-    fun providesRxApiServiceCheckout(): RxApiServiceCheckout {
+    fun providesGson(): Gson {
+        return GsonBuilder()
+            .setLenient()
+            .create()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRxApiServiceCheckout(adyenConfig: AdyenConfig, platformLog: PlatformLog): RxApiServiceCheckout {
+        val loggingCurlInterceptor = CurlLoggerInterceptor("curl", platformLog)
         val loggingInterceptor = LoggingInterceptor.Builder()
-            .loggable(BuildConfig.DEBUG)
+            .loggable(adyenConfig.isDebug)
             .setLevel(Level.BASIC)
             .log(Platform.INFO)
             .request("Request")
             .response("Response")
             .apply {
-                if (BuildConfig.DEBUG) {
+                if (adyenConfig.isDebug) {
                     enableAndroidStudio_v3_LogsHack(true)
                         //                    .logger((level, tag, msg) -> {
                         //                        Log.i(tag, msg);
@@ -49,10 +59,12 @@ class ApiModule {
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.MERCHANT_SERVER_URL)
+            .baseUrl(adyenConfig.MERCHANT_SERVER_URL)
             .client(Util.enableTls12OnPreLollipop(
                 OkHttpClient.Builder()
+                    .addInterceptor(DefaultAdyenHeaderInterceptor(adyenConfig))
                     .addInterceptor(loggingInterceptor)
+                    .addInterceptor(loggingCurlInterceptor)
             ))
             .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))

@@ -1,6 +1,6 @@
-package com.github.adyenexample.api.error
+package com.github.kolyall.adyen.error
 
-import com.github.adyenexample.api.error.RetrofitException.Companion.asRetrofitException
+import com.github.kolyall.adyen.error.RetrofitException.Companion.asRetrofitException
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

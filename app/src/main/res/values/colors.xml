@@ -1,6 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--region Palitra-->
+    <color name="appGreenDark">#01bc91</color>
+    <color name="appGreen">#07ddad</color>
+    <color name="appGreenLight">#95f1dc</color>
+    <color name="appBlue">#4285F4</color>
+    <color name="appBlueLight">#B6C9D9</color>
+    <color name="appBlueDark">#1F3751</color>
+
+    <color name="appWhite">#f6f6f6</color>
+    <color name="appWhiteSemiLight">#f9f9f9</color>
+    <color name="appWhiteLight">#fcfcfc</color>
+    <color name="appWhiteLighter">#ffffff</color>
+
+    <color name="appBlackDarker">#00142e</color>
+    <color name="appBlackDark">#050e1a</color>
+    <color name="appBlack">#0c1828</color>
+    <color name="appBlackSemiLight">#0c1e31</color>
+    <color name="appBlackLight2">#182b44</color>
+    <color name="appBlackLight">#10223A</color>
+    <color name="appBlackLighter">#162e4e</color>
+    <color name="appBlackLighterMore">#172435</color>
+
+    <color name="appRed">#990000</color>
+    <color name="appRedDark">#790000</color>
+    <color name="appGrayLight2">#f3f3f3</color>
+    <color name="appGrayBlue">#344553</color>
+    <color name="appGrayBlueLight">#203752</color>
+    <color name="grayColorFullTransparent">#000c1828</color>
+    <color name="grayColorTransparent">#0c1828</color>
+    <color name="grayColorHalfTransparent">#800c1828</color>
+    <color name="appGrayBlack">#666666</color>
+    <color name="appGrayDarker">#757575</color>
+    <color name="appGrayDark">#858585</color>
+    <color name="appGray">#9b9b9b</color>
+    <color name="appGray2">#BDBDBD</color>
+    <color name="appGray2Transparent50">#c5bdbdbd</color>
+    <color name="appGrayWhitePrimary">#f0f0f0</color>
+    <color name="appGrayLight">#d8d8d8</color>
+    <color name="appGrayWhite">#e0e0e0</color>
+    <color name="appGrayLighter">#f9f9f9</color>
+    <color name="appWhiteDark">#fafafa</color>
+    <!--endregion-->
+    <color name="black">#111111</color>
+
+    <!--App Main Colors-->
+    <color name="colorPrimary">@color/appBlack</color>
+    <color name="colorPrimaryDark">@color/appBlack</color>
+    <color name="colorAccent">@color/appGreen</color>
+    <color name="colorControlActivated">@color/appGreenDark</color>
+
+    <color name="toolbarColor">@color/appBlack</color>
+    <color name="toolbarTitleTextSelectedColor">@color/appGrayDark</color>
+    <color name="statusBarColor">@color/appBlack</color>
+    <color name="smoothProgressBarColor">@color/appGreen</color>
+    <color name="appTextColorAccent">@color/appBackgroundColor</color><!--text color for buttons pressed-->
+    <color name="appTextColorPrimary">@color/appWhite</color><!--text color for text-->
+    <color name="appTextColorSecondary">@color/appBlueLight</color><!--text color for title text-->
+    <color name="appTextColorSecondaryLight">@color/appGrayLight</color><!--text color for HINT text-->
+    <color name="appTextColorSecondaryDark">@color/appGrayDark</color><!--text color for HINT text-->
+    <color name="appBackgroundColor">@color/appBlack</color>
+    <color name="appBackgroundColorAccent">@color/appBackgroundColor</color><!--background color for buttons pressed-->
+    <color name="appBackgroundColorLight">@color/appBlackLight</color>
+    <color name="appBackgroundColorLighter">@color/appBlackLighter</color>
+    <color name="appBackgroundColorTransparent">#000c1828</color>
+
+    <color name="appDivider">@color/appBlackLight</color>
+    <!--End App Main Colors-->
+
+    <!--Dialog color-->
+    <color name="snackbarBackgroundColor">@color/appBlueDark</color>
+    <!--Dialog color-->
+    <color name="appPositiveButtonColor">@color/colorAccent</color>
+    <color name="appNegativeButtonColor">@color/appGrayDark</color>
+    <color name="appNegativeButtonColorAccent">@color/appRed</color>
+
+    <!--Views Colors-->
+    <color name="facebookBlue">#213F90</color>
+    <color name="vkBlue">#4391E2</color>
+    <color name="googleColor">#D54C3F</color>
+
+    <color name="popupTextColor">@color/appBlueLight</color>
+    <color name="popupBackgroundColor">@color/appBackgroundColorLighter</color>
+
+    <color name="fullscreen_secondary_line_color">#E5CCCCCC</color>
+
+    <!--Settings page-->
+    <color name="settings_arrows_color">@color/appGreen</color>
+    <color name="settings_divider_color">@color/appBlackLight</color>
+    <color name="settings_line_divider_color">@color/appBlackLight</color>
+
+    <!--Crop Activity-->
+    <color name="ucrop_color_widget_active" tools:override="true">@color/appGreen</color>
+    <color name="ucrop_color_statusbar" tools:override="true">@color/colorPrimary</color>
+    <color name="ucrop_color_toolbar" tools:override="true">@color/colorPrimary</color>
+    <color name="ucrop_color_widget_text" tools:override="true">@color/appGreen</color>
+    <color name="ucrop_color_widget" tools:override="true">@color/appGray2</color>
+    <color name="ucrop_color_widget_background" tools:override="true">@color/colorPrimary</color>
+    <color name="ucrop_color_toolbar_widget" tools:override="true">@color/appGreen</color>
+    <color name="ucrop_color_toolbar_text" tools:override="true">@color/appGreen</color>
+
+    <!--new colors-->
+    <color name="white">#ffffff</color>
+    <color name="white_transparent50">#c8ffffff</color>
+    <color name="default_text_color">#212121</color>
+    <color name="text_grey">#757575</color>
+
+    <!--old colors-->
+    <color name="white_transparent">#00ffffff</color>
+    <color name="accent_pressed">#03766E</color>
+    <color name="subinfo">#6d6d6d</color>
+    <color name="header_background_color">#009688</color>
+    <color name="navigationBackground">@color/white</color>
+
+    <!--activity colors-->
+    <color name="drawerArrowColor">@color/appGreen</color>
+    <!--small player-->
+    <color name="player_buttons_color">@color/appGray</color>
+    <!--small playlist-->
+    <color name="small_playlist_artist_text_color">@color/appGreen</color>
+    <!--small player-->
+    <color name="small_player_buttons_color">#BDBDBD</color>
+    <color name="small_player_progress_background_color">@color/appBlack</color>
+    <color name="small_player_progress_color">@color/appGreen</color>
+    <color name="small_player_progress_color_disabled">@color/appTextColorSecondary</color>
+    <!--track_card-->
+    <color name="media_item_title_text_color_default">@color/appTextColorPrimary</color>
+    <color name="media_item_artist_text_color">@color/appTextColorSecondary</color>
+    <color name="media_item_dots_color">@color/appTextColorSecondary</color>
+    <color name="view_item_track_title_text_color_default">@color/media_item_title_text_color_default</color>
+    <color name="media_item_title_text_color_blocked">@color/appRed</color>
+    <color name="madia_color_ordered_title_text">@color/appGreen</color>
+    <color name="madia_color_non_playable_title_text">@color/appGrayDarker</color>
+    <color name="madia_color_non_playable_background">@color/appGrayLight2</color>
+    <color name="small_controls_background_color">@color/appBlack</color>
+    <color name="player_playlist_title_color">@color/white</color>
+    <color name="player_playlist_subtitle_color">@color/white</color>
+    <color name="player_track_title_color">@color/appGreen</color>
+    <color name="player_track_subtitle_color">@color/appGreen</color>
+    <color name="player_duration_text_color">@color/appTextColorSecondary</color>
+    <color name="dialog_transparent_background">#80bdbdbd</color>
+    <color name="dialog_frame_background_color">@color/appBackgroundColor</color>
+    <color name="dialog_frame_background_color_white">@color/appBackgroundColor</color>
+    <color name="dialog_cancel_button_text_color">@color/appGray2</color>
+    <color name="shadow_end_color">#8d000000</color>
+    <color name="playlist_shadow_end_color">#4b000000</color>
+
+    <color name="navigation_item_view_selected_color">@android:color/transparent</color>
+    <color name="navigation_item_view_unselected_color">@android:color/transparent</color>
+    <color name="navigation_item_view_unselected_text_color">@color/appWhite</color>
+    <color name="navigation_item_view_unselected_icon_color">@color/appGrayDarker</color>
+    <color name="navigation_item_view_selected_text_color">@color/appGreen</color>
+
+    <color name="section_item_title_text_color">@color/appTextColorPrimary</color>
+    <color name="section_item_title_text_color_accent">@color/colorAccent</color>
+    <color name="section_item_all_view_text_color">@color/appTextColorSecondary</color>
+
+    <!--button text-->
+    <color name="text_button_white_normal">@color/white</color>
+    <color name="text_button_white_disabled">@color/appGray2</color>
+    <color name="text_button_white_pressed">@color/appGray2</color>
+
+    <color name="text_button_green_normal">@color/appGreen</color>
+    <color name="text_button_green_disabled">@color/white</color>
+    <color name="text_button_green_pressed">@color/appGreenDark</color>
+
+    <color name="text_button_grey_normal">@color/appGray2</color>
+    <color name="text_button_grey_disabled">@color/appGrayLight</color>
+    <color name="text_button_grey_pressed">@color/appBlack</color>
+
+    <color name="text_button_red_normal">@color/appRed</color>
+    <color name="text_button_red_disabled">@color/white</color>
+    <color name="text_button_red_pressed">@color/appRedDark</color>
+    <!--buttons-->
+    <color name="button_green_normal">@color/appGreen</color>
+    <color name="button_green_disabled">@color/appGrayLight</color>
+    <color name="button_green_pressed">@color/appGreenDark</color>
+
+    <color name="button_grey_normal">@color/appGray2</color>
+    <color name="button_grey_disabled">@color/appGrayLight2</color>
+    <color name="button_grey_pressed">@color/appBlack</color>
+
+
+    <color name="spinner_selected_text_color">@color/appTextColorPrimary</color>
+    <color name="bottom_underline">@color/appDivider</color>
+    <color name="playlist_option_icon_play_color">@color/appGreen</color>
+    <color name="playlist_option_icon_color">@color/appGray</color>
+    <color name="track_option_icon_color">@color/appGray</color>
+    <color name="track_option_text_color">@color/white</color>
+    <color name="track_title_color">@color/player_track_title_color</color>
+    <color name="track_subtitle_color">@color/player_track_subtitle_color</color>
+    <color name="maxline_color">@color/appGreenDark</color>
+    <color name="line_color">@color/appGreen</color>
+    <color name="dimColor">#bcac31</color>
+    <!--tap prompt-->
+    <color name="tapPromptOuterCircleColor">@color/appBlackLight</color>
+    <color name="tapPromptTargetCircleColor">@color/white</color>
+    <color name="tapPromptTitleTextColor">@color/white</color>
+    <color name="tapPromptDescriptionTextColor">@color/white</color>
+    <color name="edittext_hint_color">@color/appGrayLight2</color>
+
+    <color name="bottomNavigationBadgeColor">@color/appGreen</color>
+    <color name="bottomNavigationDefaultActiveIconColor">@color/appGreen</color>
+    <color name="bottomNavigationDefaultInactiveIconColor">@color/appGrayBlue</color>
+    <!--<color name="bottomNavigationActiveIconColor">@color/appGreen</color>-->
+    <!--<color name="bottomNavigationInactiveIconColor">@color/appGreen</color>-->
+    <color name="bottomNavigationDivider">@color/appBlackLighter</color>
+    <color name="bottomNavigationBackgroundColor">@color/appBlackLight</color>
+    <color name="bottomNavigationAccentBackgroundColor">@color/appBlackLighter</color>
+
+    <!--Collection-->
+    <color name="collection_title_text_color_default">@color/appTextColorPrimary</color>
+    <!--Playlist-->
+    <color name="playlist_title_text_color_default">@color/appTextColorPrimary</color>
+    <color name="playlist_price_text_color_free">@color/appTextColorSecondary</color>
+    <color name="playlist_price_text_color_payment">@color/appGreen</color>
+    <color name="playlist_title_text_color_selected">@color/colorAccent</color>
+    <color name="playlist_default_background_selected_color">@color/appBlackLight2</color>
+    <color name="playlist_default_background_color">@color/appBlack</color>
+    <!--Page Playlist-->
+    <color name="playlist_description_text_color">@color/appTextColorSecondary</color>
+    <color name="logo_background_color">#031021</color>
+    <color name="slidrPrimaryColor">#ce8c22</color>
+    <color name="slidrSecondaryColor">#a114a9</color>
+
+    <color name="shadow_end_color2">#b7000000</color>
+
+    <color name="view_item_playlist_medium_title_color">@color/appWhite</color>
+    <color name="pay_card_delete_background">@color/appRed</color>
+
+    <color name="text_light_checked">@color/appBlack</color>
+    <color name="text_light_disabled">@color/colorAccent</color>
+    <color name="text_light_normal">@color/colorAccent</color>
+    <color name="text_light_pressed">@color/appGray</color>
+    <color name="divider_color">#1e000000</color>
+
+    <color name="list_progress_background">@color/appBlackLight</color>
+    <color name="schedule_day_activated">@color/appGreen</color>
+    <color name="schedule_day_default">@color/appBlueLight</color>
+    <color name="place_pick_dialog_btn_selected">#33969696</color>
+    <color name="page_collection_subscription_recurrent_text_color">@color/appGrayBlue</color>
+    <color name="page_collection_subscription_limited_text_color">@color/appRed</color>
+
+    <array name="swipeRefreshColors">
+        <item>@color/appGreenDark</item>
+        <item>@color/appGreen</item>
+        <item>@color/appGreenLight</item>
+    </array>
 </resources>
