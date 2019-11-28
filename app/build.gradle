@@ -49,7 +49,7 @@ dependencies {
     def version_retrofit2 = "2.5.0"
     def retrofitRxjava2AdapterVersion = '2.6.0'
     def gsonVersion = '2.8.5'
-    def adyen_version = "3.4.1"
+    def adyen_version = "3.5.1"
     def multidex_version = "2.0.1"
     def rxJavaVersion = '2.2.11'
     def rxAndroidVersion = '2.1.1'

@@ -38,9 +38,8 @@ class MainActivityPresenter
 
     fun makeRecurentPayment(cardItem: CardItem) {
 
-        val paymentMethod = ApiRecurentPaymentMethod()
-        paymentMethod.type = "scheme"
-        paymentMethod.storedPaymentMethodId = cardItem.id
+        val paymentMethod = ApiRecurentPaymentMethod().apply { type = "scheme"
+            storedPaymentMethodId = cardItem.id }
 
         val paymentsRequest = ApiPaymentsRequest(
             paymentMethod = paymentMethod,
@@ -81,7 +80,7 @@ class MainActivityPresenter
             .subscribeAndAdd(disposables)
     }
 
-    fun makePayment(paymentComponentData: PaymentComponentData<PaymentMethodDetails>) {
+    fun makePayment(paymentComponentData: PaymentComponentData<out PaymentMethodDetails>) {
         if (paymentComponentData.paymentMethod == null) {
             Toast.makeText(view, "paymentMethod is Not Valid", Toast.LENGTH_SHORT).show()
             return

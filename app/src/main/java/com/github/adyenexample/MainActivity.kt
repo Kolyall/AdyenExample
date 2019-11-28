@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var gson: Gson
 
-    private var componentState: PaymentComponentState<com.adyen.checkout.base.model.payments.request.PaymentMethodDetails>? = null
+    private var componentState: PaymentComponentState<out com.adyen.checkout.base.model.payments.request.PaymentMethodDetails>? = null
     private lateinit var adyenCardView: CardView
     private lateinit var submitButton: AppCompatButton
     private lateinit var recyclerView: RecyclerView
