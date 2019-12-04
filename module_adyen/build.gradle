@@ -80,8 +80,12 @@ dependencies {
     implementation "javax.annotation:jsr250-api:${javaxAnnotationVersion}"
     //endregion
 
-    def adyen_version = "3.4.1"
-    implementation "com.adyen.checkout:core-v3:${adyen_version}"
+    def adyen_version = "3.5.1"
+    api "com.adyen.checkout:card-ui:$adyen_version"
+    api "com.adyen.checkout:redirect:$adyen_version"
+    api "com.adyen.checkout:3ds2:$adyen_version"
+    api "com.adyen.checkout:drop-in:$adyen_version"
+    api "com.adyen.checkout:core-v3:${adyen_version}"
 
     api ("com.github.kolyall:java-utils:$javaUtilsVersion"){
         exclude group: 'io.reactivex.java2'

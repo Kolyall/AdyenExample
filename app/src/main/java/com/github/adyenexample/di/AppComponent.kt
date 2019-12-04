@@ -11,13 +11,15 @@ import dagger.android.support.DaggerApplication
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    ContributesModule::class,
-    ModuleApp::class,
-    AppModule::class,
-    ApiModule::class
-])
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        ContributesModule::class,
+        ModuleApp::class,
+        AppModule::class,
+        ApiModule::class
+    ]
+)
 interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(theApplication: TheApplication)
 

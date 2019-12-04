@@ -8,10 +8,10 @@ import com.github.adyenexample.ext.SchedulersProvider
 import com.github.adyenexample.ext.async
 import com.github.adyenexample.ext.subscribeAndAdd
 import com.github.adyenexample.models.CardItem
-import com.github.adyenexample.models.toApi
 import com.github.adyenexample.models.toViewModel
 import com.github.kolyall.adyen.AdyenConfig
 import com.github.kolyall.adyen.AdyenService
+import com.github.kolyall.adyen.mapper.toApi
 import com.github.kolyall.adyen.model.ApiAdditionalData
 import com.github.kolyall.adyen.model.ApiPaymentMethodsRequest
 import com.github.kolyall.adyen.model.ApiPaymentsRequest
@@ -29,8 +29,8 @@ class MainActivityPresenter
     private val schedulersProvider: SchedulersProvider
 ) {
 
-     val DEFAULT_COUNTRY = "NL"
-     val DEFAULT_LOCALE = "en_US"
+    val DEFAULT_COUNTRY = "NL"
+    val DEFAULT_LOCALE = "en_US"
 
     lateinit var view: MainActivity
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -86,8 +86,10 @@ class MainActivityPresenter
 
     fun makeRecurrentPayment(cardItem: CardItem) {
 
-        val paymentMethod = ApiRecurentPaymentMethod().apply { type = "scheme"
-            storedPaymentMethodId = cardItem.id }
+        val paymentMethod = ApiRecurentPaymentMethod().apply {
+            type = "scheme"
+            storedPaymentMethodId = cardItem.id
+        }
 
         val paymentsRequest = ApiPaymentsRequest(
             paymentMethod = paymentMethod,

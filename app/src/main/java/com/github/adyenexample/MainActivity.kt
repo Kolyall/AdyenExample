@@ -15,8 +15,8 @@ import com.adyen.checkout.card.CardConfiguration
 import com.adyen.checkout.card.CardView
 import com.adyen.checkout.core.api.Environment
 import com.github.adyenexample.models.CardItem
-import com.github.adyenexample.models.toAdyen
 import com.github.adyenexample.view.CardItemAdapter
+import com.github.kolyall.adyen.mapper.toAdyen
 import com.github.kolyall.adyen.model.ApiPaymentMethodsApiResponse
 import com.google.gson.Gson
 import dagger.android.AndroidInjection

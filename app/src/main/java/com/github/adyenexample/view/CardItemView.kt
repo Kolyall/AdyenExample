@@ -10,12 +10,12 @@ import com.github.adyenexample.models.CardItem
 
 class CardItemView : LinearLayout, View.OnClickListener {
     private lateinit var item: CardItem
-    var id : TextView
+    var id: TextView
 
-    var brand : TextView
+    var brand: TextView
     var holderName: TextView
-    var lastFour : TextView
-    var expiry : TextView
+    var lastFour: TextView
+    var expiry: TextView
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -38,7 +38,7 @@ class CardItemView : LinearLayout, View.OnClickListener {
         brand.text = cardItem.brand
         holderName.text = cardItem.holderName
         lastFour.text = cardItem.lastFour
-        expiry.text = cardItem.expiryMonth+"/"+cardItem.expiryYear
+        expiry.text = cardItem.expiryMonth + "/" + cardItem.expiryYear
     }
 
     var onCardItemClickListener: OnCardItemClickListener? = null
@@ -49,4 +49,4 @@ class CardItemView : LinearLayout, View.OnClickListener {
 
 }
 
-typealias OnCardItemClickListener = (CardItem)->Unit
+typealias OnCardItemClickListener = (CardItem) -> Unit

@@ -11,7 +11,7 @@ import io.reactivex.internal.functions.Functions
 val ERROR_FUNCTION: Consumer<Throwable> = Consumer { it.printStackTrace() }
 
 fun <T> Maybe<T>.subscribeAndAdd(disposables: CompositeDisposable) {
-    this.subscribe(Functions.emptyConsumer(), ERROR_FUNCTION, Functions.EMPTY_ACTION)
+    subscribe(Functions.emptyConsumer(), ERROR_FUNCTION, Functions.EMPTY_ACTION)
         .addToDisposables(disposables)
 }
 
@@ -23,7 +23,7 @@ interface SchedulersProvider {
 
 
 fun <T> Maybe<T>.async(schedulersProvider: SchedulersProvider): Maybe<T> {
-    return this.subscribeOn(schedulersProvider.io())
+    return subscribeOn(schedulersProvider.io())
         .observeOn(schedulersProvider.ui())
 }
 
