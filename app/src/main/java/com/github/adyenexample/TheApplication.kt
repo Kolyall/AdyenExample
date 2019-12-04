@@ -2,8 +2,8 @@ package com.github.adyenexample
 
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.github.adyenexample.injection.AppComponent
-import com.github.adyenexample.injection.DaggerAppComponent
+import com.github.adyenexample.di.AppComponent
+import com.github.adyenexample.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 

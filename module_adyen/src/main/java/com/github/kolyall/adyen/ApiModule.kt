@@ -35,7 +35,7 @@ open class ApiModule {
 
     @Provides
     @Singleton
-    fun providesRxApiServiceCheckout(adyenConfig: AdyenConfig, platformLog: PlatformLog): RxApiServiceCheckout {
+    fun providesRxApiServiceCheckout(gson: Gson, adyenConfig: AdyenConfig, platformLog: PlatformLog): AdyenService {
         val loggingCurlInterceptor = CurlLoggerInterceptor("curl", platformLog)
         val loggingInterceptor = LoggingInterceptor.Builder()
             .loggable(adyenConfig.isDebug)
@@ -54,10 +54,6 @@ open class ApiModule {
             }
             .build()
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-
         return Retrofit.Builder()
             .baseUrl(adyenConfig.merchantServerUrl)
             .client(Util.enableTls12OnPreLollipop(
@@ -69,7 +65,7 @@ open class ApiModule {
             .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(RxApiServiceCheckout::class.java)
+            .create(AdyenService::class.java)
 
     }
 

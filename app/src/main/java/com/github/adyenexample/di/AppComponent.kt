@@ -1,4 +1,4 @@
-package com.github.adyenexample.injection
+package com.github.adyenexample.di
 
 import android.app.Application
 import com.github.adyenexample.TheApplication

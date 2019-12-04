@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -31,11 +31,9 @@
         <item name="popupMenuStyle">@style/PopupMenu</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
 
-        <item name="myButtonStyle">@style/CardItemViewStyle</item>
     </style>
 
     <style name="AppTheme" parent="@style/BaseAppTheme">
-        <item name="android:background">@color/appBackgroundColor</item>
     </style>
 
     <style name="AppTheme.Default">
@@ -90,9 +88,9 @@
         <!-- <item name="android:background">@color/color_primary</item> -->
     </style>
 
-    <style name="AdyenCheckout.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="AdyenCheckout.TextInputLayout" >
         <item name="boxStrokeColor">@color/primaryColor</item>
-        <item name="hintTextAppearance">@style/AppAdyenCheckout.HintTextStyle</item>
+        <item name="hintTextAppearance">@style/AdyenCheckout.HintTextStyle</item>
         <item name="android:minHeight">@dimen/input_layout_height</item>
         <item name="android:textColor">@color/appTextColorPrimary</item>
         <item name="editTextColor">@color/appTextColorPrimary</item>
@@ -101,18 +99,12 @@
         <item name="android:textColorHighlight">@color/appTextColorPrimary</item>
     </style>
 
-    <style name="AppAdyenCheckout.HintTextStyle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/appTextColorPrimary</item>
-    </style>
-
     <style name="CardItemViewStyle">
-        <item name="android:textAppearance">@style/TextAppearanceStyle</item>
+        <item name="android:textAppearance">@style/CardItemViewTextAppearanceStyle</item>
     </style>
 
-    <style name="TextAppearanceStyle">
+    <style name="CardItemViewTextAppearanceStyle">
         <item name="android:textColor">@color/appTextColorPrimary</item>
     </style>
-
-    <attr name="myButtonStyle" format="reference" />
 
 </resources>
